@@ -1,0 +1,95 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile information",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "User ID" },
+        "email": { "type": "string", "format": "email" },
+        "displayName": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "role": { "type": "string", "enum": ["user", "admin"] }
+      },
+      "required": ["uid", "email"]
+    },
+    "Pet": {
+      "title": "Pet",
+      "description": "Pet profile",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "name": { "type": "string" },
+        "type": { "type": "string" },
+        "breed": { "type": "string" },
+        "age": { "type": "number" },
+        "image": { "type": "string" }
+      },
+      "required": ["userId", "name", "type"]
+    },
+    "Appointment": {
+      "title": "Appointment",
+      "description": "Vet appointment",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "vet": { "type": "string" },
+        "clinic": { "type": "string" },
+        "date": { "type": "string" },
+        "time": { "type": "string" },
+        "pet": { "type": "string" },
+        "status": { "type": "string" }
+      },
+      "required": ["userId", "vet", "date", "time"]
+    },
+    "Post": {
+      "title": "Post",
+      "description": "Community post",
+      "type": "object",
+      "properties": {
+        "authorId": { "type": "string" },
+        "authorName": { "type": "string" },
+        "authorAvatar": { "type": "string" },
+        "time": { "type": "string" },
+        "content": { "type": "string" },
+        "likes": { "type": "number" },
+        "image": { "type": "string" }
+      },
+      "required": ["authorId", "authorName", "content", "likes"]
+    },
+    "Comment": {
+      "title": "Comment",
+      "description": "Comment on a post",
+      "type": "object",
+      "properties": {
+        "authorId": { "type": "string" },
+        "authorName": { "type": "string" },
+        "text": { "type": "string" },
+        "time": { "type": "string" }
+      },
+      "required": ["authorId", "authorName", "text"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/User" },
+      "description": "User profiles"
+    },
+    "/pets/{petId}": {
+      "schema": { "$ref": "#/entities/Pet" },
+      "description": "User pets"
+    },
+    "/appointments/{appointmentId}": {
+      "schema": { "$ref": "#/entities/Appointment" },
+      "description": "User appointments"
+    },
+    "/posts/{postId}": {
+      "schema": { "$ref": "#/entities/Post" },
+      "description": "Community posts"
+    },
+    "/posts/{postId}/comments/{commentId}": {
+      "schema": { "$ref": "#/entities/Comment" },
+      "description": "Comments on posts"
+    }
+  }
+}

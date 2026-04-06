@@ -1,0 +1,5 @@
+{
+  "name": "PawCheck",
+  "description": "Pet Health Checker System with health assessment, vet locator, community, and blog.",
+  "requestFramePermissions": ["geolocation"]
+}
